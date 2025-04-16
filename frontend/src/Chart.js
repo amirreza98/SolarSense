@@ -14,7 +14,7 @@ function Chart() {
   const [range, setRange] = useState("24h");
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/sensors?range=${range}`)
+    fetch(`https://solarsense-backend.onrender.com/api/sensors?range=${range}`)
       .then((res) => res.json())
       .then((json) => {
         const cleaned = json.map((item) => ({
