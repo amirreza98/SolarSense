@@ -8,7 +8,7 @@ const SideBar = () => {
                     
         <SideBarIcon icon={<Columns3Cog size="28" />} text= {"💡"} />
         <Divider />
-        <SideBarIcon icon={<LayoutDashboard size="32" />} text= {"Dashboard"} />
+        <SideBarIcon icon={<LayoutDashboard size="20" />} text= {"Dashboard"} />
         <SideBarIcon icon={<ChartArea  size="20" />} text= {"Real-time Visualization"} />
         <SideBarIcon icon={<CircleGauge size="20" />} text= {"Performance Analytics"} />
         <SideBarIcon icon={<Bell size="20" />} text= {"Anomaly Alerts"} />
