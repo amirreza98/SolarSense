@@ -3,7 +3,7 @@ import { Columns3Cog, LayoutDashboard, CircleGauge, ChartArea, Bell ,Link, Downl
 
 const SideBar = () => {
   return (
-    <div className="fixed top-0 left-0 h-screen w-16 flex flex-col
+    <div className="fixed top-0 left-0 h-screen w-20 flex flex-col
                   bg-white dark:bg-gray-900 shadow-lg">
                     
         <SideBarIcon icon={<Columns3Cog size="28" />} text= {"💡"} />

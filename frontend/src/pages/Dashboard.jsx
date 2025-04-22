@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent } from "../components/ui/card";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
-import { Bell, Sun, BatteryCharging, Activity, LayoutDashboard  } from "lucide-react";
+import { Bell, Sun, BatteryCharging, Activity, CloudSun  } from "lucide-react";
 
 const data = [
   { time: "04:00", production: 0.2, consumption: 0.3, self: 0.1 },
@@ -13,20 +13,27 @@ const data = [
 
 export default function Dashboard() {
   return (
-    <div className="p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
 
       {/* KPI Section */}
-      <Card className="col-span-1 md:col-span-2 flex justify-between items-center p-4">
+      <Card className="h-100 w-100 relative p-4">
         <div>
-          <p className="text-sm text-gray-500">Berlin, sonnenallee</p>
-          <p className="text-lg font-semibold">25°C - Pretty Cloudy</p>
-          <p className="text-xs text-gray-400">Last sync: 10 min ago</p>
-          <div className="mt-2 flex items-center text-green-600 font-bold">
-            <Activity className="w-4 h-4 mr-1" /> Active - 3.02 kW
-            <LayoutDashboard className="w-4 h-4 ml-4 mr-1" /> 3.5 kWh
+          <p className="m-2 text-sm text-gray-500">Berlin, sonnenallee</p>
+          <p className="m-2 text-lg font-semibold">25°C</p>
+          <p className="m-2 text-xs text-gray-400">Last sync: 10 min ago</p>
+            <CloudSun className="absolute top-4 right-6 w-6 h-6" color="gray"/> 
+            <p className="absolute top-10 right-6 text-sm text-gray-500 ">prety cloudy</p>
+          <div className="bg-green-400 flex text-white      text-sm font-semibold w-24 ml-2 mt-24 rounded-lg">
+              <Activity className="m-1 w-8 h-8" />
+              <p className="text-l font-semibold">Active <br/> 3.02 kW</p> 
           </div>
+          <div className=" flex text-sm font-semibold w-24 ml-2 mt-2">
+              <p className="text-l text-gray-400 ">max: 3.02kW
+                <br/> min: 0.02kW
+              </p>
+              </div>
         </div>
-        <img src="/solar-panel.png" alt="solar" className="w-24 h-24" />
+        <img src="../../public/assets/solar.svg" alt="solarr" className=" w-48 h-48 absolute top-14 right-6" />
       </Card>
 
       {/* Alerts Section */}
