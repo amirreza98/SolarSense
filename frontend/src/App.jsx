@@ -13,12 +13,12 @@ function App() {
 
   return (
     <>
-      <div className="w-full h-screen flex">
+      <div className="flex">
         <BrowserRouter>
           <div className="h-screen w-20 z-10">
             <SideBar />
           </div>
-          <div className="bg-lime-400 w-full h-full p-8">
+          <div className="bg-lime-400 w-full h-screen p-8">
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/visualization" element={<Visualization />} />
