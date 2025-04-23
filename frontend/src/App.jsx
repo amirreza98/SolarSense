@@ -1,18 +1,35 @@
 import './App.css'
 import Dashboard from './pages/Dashboard'
-import SideBar from './components/SideBar'
+import SideBar from './components/ui/SideBar'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Visualization from './pages/Visualization'
+import Analytics from './pages/Analytics'
+import Alerts from './pages/Alerts'
+import DigitalTwin from './pages/DigitalTwin'
+import Reports from './pages/Reports'
+import SettingsPage from './pages/SettingsPage'
 
 function App() {
 
   return (
     <>
       <div className="w-full h-screen flex">
-        <div className="h-screen w-20">
-          <SideBar />
-        </div>
-        <div className="bg-lime-400 w-full h-full p-8">
-          <Dashboard />
-        </div>
+        <BrowserRouter>
+          <div className="h-screen w-20 z-10">
+            <SideBar />
+          </div>
+          <div className="bg-lime-400 w-full h-full p-8">
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/visualization" element={<Visualization />} />
+              <Route path="/analytics" element={<Analytics />} />
+              <Route path="/alerts" element={<Alerts />} />
+              <Route path="/digital-twin" element={<DigitalTwin />} />
+              <Route path="/reports" element={<Reports />} />
+              <Route path="/settings" element={<SettingsPage />} />
+            </Routes>
+          </div>
+        </BrowserRouter>
       </div>
     </>
   )
