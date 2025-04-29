@@ -1,13 +1,13 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { Card } from '../ui/card'
 import { motion, useMotionValue, useTransform, useMotionTemplate } from "framer-motion";
+import ApplyNewRuleCard from './ApplyNewRuleCard';
 
 
 function Modules() {
   const x1 = useMotionValue(50);
   const y1 = useMotionValue(50);
-  const x2 = useMotionValue(150);
+  const x2 = useMotionValue(50);
   const y2 = useMotionValue(150);
   const midX = useTransform([x1, x2], ([a, b]) => (a + b) / 2);
   const midY = useTransform([y1, y2], ([a, b]) => (a + b) / 2);
@@ -135,8 +135,8 @@ function Modules() {
         style={{ x: x2, y: y2 }}
         dragElastic={0.2}
         whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="w-40 h-72 m-4 bg-gray-200 relative group overflow-hidden rounded-lg shadow-lg cursor-grab active:cursor-grabbing"
+        whileTap={{ scale: 0.995 }}
+        className="w-40 h-72 m-4 bg-gray-200 relative group  rounded-lg shadow-lg cursor-grab active:cursor-grabbing"
       >
         <img className="absolute w-28 mix-blend-multiply m-4" src="https://www.lucas-nuelle.com/images/axilon/NEUBILD/Artikelbilder/CO/32/CO3208-1Q-h310-ar.jpg" alt="Solar Module" />
         <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition duration-300">
@@ -157,6 +157,7 @@ function Modules() {
             <li>650 x 456 x 305 mm (HxWxD)</li>
           </ul>
         </p>
+        <ApplyNewRuleCard />
         </div>
       </motion.div>
       
@@ -164,7 +165,7 @@ function Modules() {
       <motion.div
         drag
         dragMomentum={false}
-        style={{ x: 500 , y: -300}}
+        style={{ x: 900 , y: -290}}
         dragElastic={0.2}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
@@ -262,7 +263,7 @@ function Modules() {
       <motion.div
         drag
         dragMomentum={false}
-        style={{ x: 700 , y: -900}}
+        style={{ x: 900 , y: -1510}}
         dragElastic={0.2}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}

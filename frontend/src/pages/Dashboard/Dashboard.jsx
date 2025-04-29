@@ -1,9 +1,9 @@
 import React from "react";
-import DashboardQuickDetails from "../components/DashboardQuickDeitails";
-import DashboardPowerFlow from "../components/DashboardPowerFlow";
-import DashboardAlerts from "../components/DashboardAlerts";
-import DashboardChart from "../components/DashboardChart";
-import DashboardGridInfo from "../components/DasboardGridInfo";
+import DashboardQuickDetails from "./components/DashboardQuickDeitails";
+import DashboardPowerFlow from "./components/DashboardPowerFlow";
+import DashboardAlerts from "./components/DashboardAlerts";
+import DashboardChart from "./components/DashboardChart";
+import DashboardGridInfo from "./components/DasboardGridInfo";
 
 
 

@@ -1,11 +1,11 @@
 import './App.css'
-import Dashboard from './pages/Dashboard'
+import Dashboard from './pages/Dashboard/Dashboard'
 import SideBar from './components/ui/SideBar'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Visualization from './pages/Visualization'
-import Analytics from './pages/Analytics'
-import Alerts from './pages/Alerts'
-import DigitalTwin from './pages/DigitalTwin'
+import Visualization from './pages/Visualization/Visualization'
+import Analytics from './pages/Analytics/Analytics'
+import Alerts from './pages/Alerts/Alerts'
+import DigitalTwin from './pages/DigitalTwin/DigitalTwin'
 import Reports from './pages/Reports'
 import SettingsPage from './pages/SettingsPage'
 
