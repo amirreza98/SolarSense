@@ -18,7 +18,7 @@ function App() {
           <div className="h-screen w-20 z-10">
             <SideBar />
           </div>
-          <div className="bg-lime-400 w-full h-screen p-8">
+          <div className="bg-lime-400 w-full h-screen">
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/visualization" element={<Visualization />} />

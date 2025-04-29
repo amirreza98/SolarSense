@@ -1,0 +1,65 @@
+[
+    {
+      "id": "SolarModule",
+      "position": { "x": 200, "y": 100 },
+      "img": "https://www.lucas-nuelle.com/images/axilon/NEUBILD/Artikelbilder/CO/32/CO3208-1Y-h310-ar.jpg",
+      "title": "Solar Module",
+      "features": ["halogen spotlight:", "Power: 500W", "Power supply: 230V AC", "solar module:", "Power: 500W", "Power supply: 230V AC"],
+      "catalogLink": "https://www.lucas-nuelle.com/index.php/page/317/pid/40460/apg/21532/Solar-module-with-solar-altitude-emulator.htm?print=1",
+      "formula": "P = V * I"
+    },
+    {
+        "id": "InverterModule",
+        "position": { "x": 300, "y": 200 },
+        "img": "https://www.lucas-nuelle.com/images/axilon/NEUBILD/Artikelbilder/CO/32/CO3208-1Q-h310-ar.jpg",
+        "title": "3-phase photovoltaic inverter",
+        "features": ["features:", "Feed management conforming EEG2012", "Power reduction adjustable", "USB port via SCADA Lab", "DC circuit breaker", "Overload voltage protection", "DC input voltage range: 250-1000V", "Output voltage: 3x400 V", "Power output: 3200 W", "Weight: 15 kg", "Dimensions: 650 x 456 x 305 mm (HxWxD)"],
+        "catalogLink": "",
+        "formula": ""
+      },
+      {
+        "id": "LoadModule",
+        "position": "",
+        "img": "https://www.lucas-nuelle.com/images/axilon/NEUBILD/Artikelbilder/CO/32/CO3208-1J-h310-ar.jpg",
+        "title": "Load unit 1kOhm, 500W",
+        "features": ["features:", "Resistor:", "0...1 kOhm / 500 W continuously adjustable", "Current:", "0 – 50 Ohm max. 6A", "51 – 200 Ohm max 2A", "201- 1k Ohm max 0.6A", "Connection terminals:", "4 mm safety sockets", "Weight: 4.3 kg", "Dimensions: 200 x 300 x 200 mm (HxWxD)"],
+        "catalogLink": "",
+        "formula": ""
+      },
+      {
+        "id": "qualityMeterModule",
+        "position": "",
+        "img": "https://www.lucas-nuelle.com/images/axilon/NEUBILD/Artikelbilder/CO/51/CO5127-1S-h310-ar.jpg",
+        "title": "",
+        "features": ["", "", "", "", "", "", "", "", "", ""],
+        "catalogLink": "",
+        "formula": ""
+      },
+      {
+        "id": "Power-MultimeterModule",
+        "position": "",
+        "img": "https://www.lucas-nuelle.com/images/axilon/NEUBILD/Artikelbilder/CO/51/CO5127-2A-h310-ar.jpg",
+        "title": "Power-Multimeter",
+        "features": ["", "", "", "", "", "", "", "", "", ""],
+        "catalogLink": "",
+        "formula": ""
+      },
+      {
+        "id": "PowerSupplyModule",
+        "position": "",
+        "img": "https://www.lucas-nuelle.com/images/axilon/NEUBILD/Artikelbilder/CO/32/CO3212-5V-h310-ar.jpg",
+        "title": "Three-phase power supply",
+        "features": ["", "", "", "", "", "", "", "", "", ""],
+        "catalogLink": "",
+        "formula": ""
+      },
+      {
+        "id": "",
+        "position": "",
+        "img": "",
+        "title": "",
+        "features": ["", "", "", "", "", "", "", "", "", ""],
+        "catalogLink": "",
+        "formula": ""
+      }
+  ]
