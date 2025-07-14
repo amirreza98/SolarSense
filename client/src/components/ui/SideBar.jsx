@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Columns3Cog, LayoutDashboard, CircleGauge, ChartArea, Bell ,Link as LinkIcon, Download, Settings } from 'lucide-react';
+import { Columns3Cog, LayoutDashboard, CircleGauge, ChartArea, Bell ,MonitorCheck, Download, Settings } from 'lucide-react';
 
 const SideBar = () => {
   return (
@@ -10,10 +10,10 @@ const SideBar = () => {
         <SideBarIcon icon={<Columns3Cog size="28" />} text= {"💡"} />
         <Divider />
         <SideBarIcon icon={<LayoutDashboard size="20" />} text= {"Dashboard"} to="/" />
-        <SideBarIcon icon={<ChartArea  size="20" />} text= {"Real-time Visualization"} to="/visualization"/>
-        <SideBarIcon icon={<CircleGauge size="20" />} text= {"Performance Analytics"} to="/analytics"/>
-        <SideBarIcon icon={<Bell size="20" />} text= {"Anomaly Alerts"} to="/alerts"/>
-        <SideBarIcon icon={<LinkIcon size="20" />} text= {"Digital Twin Section"} to="/digital-twin"/>
+        <SideBarIcon icon={<CircleGauge size="20" />} text= {"Monitoring Panel"} to="/MonitoringPanel"/>
+        <SideBarIcon icon={<Bell size="20" />} text= {"Anomaly Alerts"} to="/Alerts"/>
+        <SideBarIcon icon={<ChartArea  size="20" />} text= {"Interactive Charts Visualization"} to="/InteractiveCharts"/>
+        <SideBarIcon icon={<MonitorCheck size="20" />} text= {"System Summary panel"} to="/SystemSummary"/>
         <SideBarIcon icon={<Download size="20" />} text= {"Download Reports"} to="/reports"/>
         <Divider />
         <SideBarIcon icon={<Settings size="22" />} text= {"Setting"} to="/settings"/>
