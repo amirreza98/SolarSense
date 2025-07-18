@@ -14,12 +14,18 @@ const data = [
 
 function MonitorringPanel() {
   return (
-    <motion.div className="h-full w-full flex">
-      <div className="w-full h-full bg-white p-4 rounded-lg shadow-md">
+    <motion.div className="relative h-full w-full flex">
+      <div className="w-full h-full bg-white p-4 rounded-lg shadow-md flex flex-col">
         <h2 className="text-xl font-semibold mb-4">Monitoring Panel</h2>
-        <ChartRecharts data={data} lines={["Voltage"]} />
-        <ChartRecharts data={data} lines={["Curent"]} />
-        <ChartRecharts data={data} lines={["Frequncy"]} height={100}/>
+        <div className="flex-1 min-h-0">
+          <ChartRecharts data={data} lines={["Voltage"]} />
+        </div>
+        <div className="flex-1 min-h-0">
+          <ChartRecharts data={data} lines={["Curent"]} />
+        </div>
+        <div className="flex-1 min-h-0">
+          <ChartRecharts data={data} lines={["Frequncy"]} />
+        </div>
       </div>
     </motion.div>
   )
