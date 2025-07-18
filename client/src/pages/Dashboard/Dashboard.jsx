@@ -7,7 +7,7 @@ import SystemSummary from "../SystemSummary/SystemSummary";
 
 export default function Dashboard() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:grid-rows-2 gap-4 p-8 h-screen">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4 p-8 h-full md:h-screen md:grid-rows-2 overflow-auto">
 
       {/* MonitorringPanel */}
       <MonitorringPanel />

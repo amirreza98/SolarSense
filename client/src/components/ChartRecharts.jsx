@@ -4,7 +4,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 function ChartRecharts({ data, lines }) {
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={data} margin={{ top: 2, right: 5, bottom: 0, left: 0 }}>
+      <LineChart data={data} margin={{ top: 2, right: 5, bottom: 0, left: -18 }}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="TimeStamp" />
         <YAxis />

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import useIsMobile from '../../hooks/useIsMobile';
 
 const alerts = [
   {
@@ -57,61 +58,94 @@ const severityColors = {
 
 
 function Alerts() {
+  const isMobile = useIsMobile();
+
   return (
     <motion.div
-      className="h-full lg:col-span-2 md:col-span-1 w-full flex"
+      className="h-full lg:col-span-2 md:col-span-1 w-full overflow-auto"
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.8 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="w-full h-full bg-white p-4 rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4">Alerts</h2>
-        {/* Add your alert components here */}
-        <p>Alert data will be displayed here.</p>
-        <div>
-          <h2 className="text-xl font-bold mb-4">Alerts Dashboard</h2>
-          <table className="min-w-full border border-gray-300">
-            <thead className="bg-gray-100">
-              <tr>
-                <th className="border p-2 text-left">Timestamp</th>
-                <th className="border p-2 text-left">Event Type</th>
-                <th className="border p-2 text-left">Severity</th>
-                <th className="border p-2 text-left">Component</th>
-                <th className="border p-2 text-left">Status</th>
-                <th className="border p-2 text-left">Acknowledged By</th>
-              </tr>
-            </thead>
-            <tbody>
-              {alerts.map((alert, index) => (
-                <tr key={index} className="hover:bg-gray-50">
-                  <td className="border p-2">
-                    {new Date(alert.timestamp).toLocaleString()}
-                  </td>
-                  <td className="border p-2">{alert.eventType}</td>
-                  <td
-                    className="border p-2 font-semibold"
-                    style={{ color: severityColors[alert.severityLevel] }}
-                  >
-                    {alert.severityLevel.toUpperCase()}
-                  </td>
-                  <td className="border p-2">{alert.componentAffected}</td>
-                  <td className="border p-2">{alert.status}</td>
-                  <td className="border p-2">
-                    {alert.acknowledgedBy
-                      ? `${alert.acknowledgedBy.operator} (${new Date(
-                          alert.acknowledgedBy.responseTime
-                        ).toLocaleTimeString()})`
-                      : "-"}
-                  </td>
+      {isMobile ? (
+        <div className="w-full h-full bg-white p-4 rounded-lg shadow-md overflow-auto">
+          <h2 className="text-xl font-semibold mb-4">Alerts</h2>
+          {/* Add your alert components here */}
+          <p>Alert data will be displayed here.</p>
+          <div>
+            <h2 className="text-xl font-bold mb-4">Alerts Dashboard</h2>
+            <table className="min-w-full border border-gray-300">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="border p-2 text-left">Timestamp</th>
+                  <th className="border p-2 text-left">Event Type</th>
+                  <th className="border p-2 text-left">Component</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {alerts.map((alert, index) => (
+                  <tr key={index} className="hover:bg-gray-50">
+                    <td className="border p-2">
+                      {new Date(alert.timestamp).toLocaleString()}
+                    </td>
+                    <td className="border p-2">{alert.eventType}</td>
+                    <td className="border p-2">{alert.componentAffected}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="w-full h-full bg-white p-4 rounded-lg shadow-md overflow-auto">
+          <h2 className="text-xl font-semibold mb-4">Alerts</h2>
+          {/* Add your alert components here */}
+          <p>Alert data will be displayed here.</p>
+          <div>
+            <h2 className="text-xl font-bold mb-4">Alerts Dashboard</h2>
+            <table className="min-w-full border border-gray-300">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="border p-2 text-left">Timestamp</th>
+                  <th className="border p-2 text-left">Event Type</th>
+                  <th className="border p-2 text-left">Severity</th>
+                  <th className="border p-2 text-left">Component</th>
+                  <th className="border p-2 text-left">Status</th>
+                  <th className="border p-2 text-left">Acknowledged By</th>
+                </tr>
+              </thead>
+              <tbody>
+                {alerts.map((alert, index) => (
+                  <tr key={index} className="hover:bg-gray-50">
+                    <td className="border p-2">
+                      {new Date(alert.timestamp).toLocaleString()}
+                    </td>
+                    <td className="border p-2">{alert.eventType}</td>
+                    <td
+                      className="border p-2 font-semibold"
+                      style={{ color: severityColors[alert.severityLevel] }}
+                    >
+                      {alert.severityLevel.toUpperCase()}
+                    </td>
+                    <td className="border p-2">{alert.componentAffected}</td>
+                    <td className="border p-2">{alert.status}</td>
+                    <td className="border p-2">
+                      {alert.acknowledgedBy
+                        ? `${alert.acknowledgedBy.operator} (${new Date(
+                            alert.acknowledgedBy.responseTime
+                          ).toLocaleTimeString()})`
+                        : "-"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </motion.div>
-  )
+  );
 }
 
 export default Alerts

@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from "framer-motion";
 import ChartRecharts from '../../components/ChartRecharts';
+import useIsMobile from '../../hooks/useIsMobile';
 
 const data = [
   { TimeStamp: 'A', Voltage: 4000, Curent: 2400, Frequncy: 2400 },
@@ -13,19 +14,23 @@ const data = [
 ];
 
 function MonitorringPanel() {
+    const isMobile = useIsMobile();
   return (
-    <motion.div className="relative h-full w-full flex">
+    <motion.div className="relative h-full min-h-[100px] w-full flex overflow-auto">
       <div className="w-full h-full bg-white p-4 rounded-lg shadow-md flex flex-col">
         <h2 className="text-xl font-semibold mb-4">Monitoring Panel</h2>
-        <div className="flex-1 min-h-0">
+        <div className="flex-1 min-h-24">
           <ChartRecharts data={data} lines={["Voltage"]} />
         </div>
-        <div className="flex-1 min-h-0">
-          <ChartRecharts data={data} lines={["Curent"]} />
-        </div>
-        <div className="flex-1 min-h-0">
-          <ChartRecharts data={data} lines={["Frequncy"]} />
-        </div>
+        {!isMobile && 
+        <>
+          <div className="flex-1 min-h-24">
+            <ChartRecharts data={data} lines={["Curent"]} />
+          </div>
+          <div className="flex-1 min-h-24">
+            <ChartRecharts data={data} lines={["Frequncy"]} />
+          </div>
+        </>}
       </div>
     </motion.div>
   )
