@@ -18,7 +18,7 @@ function MonitorringPanel() {
   return (
     <motion.div className="relative h-full min-h-[100px] w-full flex overflow-auto">
       <div className="w-full h-full bg-white p-4 rounded-lg shadow-md flex flex-col">
-        <h2 className="text-xl font-semibold mb-4">Monitoring Panel</h2>
+        <h2 className="text-xs md:text-xl font-semibold mb-4">Monitoring Panel</h2>
         <div className="flex-1 min-h-24">
           <ChartRecharts data={data} lines={["Voltage"]} />
         </div>
