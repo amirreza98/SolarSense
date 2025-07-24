@@ -1,14 +1,15 @@
-# main.py
-import time
-from modbus_reader import read_data
-from fault_detector import detect_fault
+from fastapi import FastAPI
+from api.faults_api import router as faults_router
+from fastapi.middleware.cors import CORSMiddleware
 
-while True:
-    data = read_data()
-    if data:
-        faults = detect_fault(data)
-        # log_data(data, faults)
-        print("✅ Logged:", data, "Faults:", faults)
-    else:
-        print("⚠️ Failed to read from Modbus")
-    time.sleep(5) 
+app = FastAPI()
+
+app.include_router(faults_router)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # این یعنی همه جا اجازه دارن وصل بشن (برای تست خوبه)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)

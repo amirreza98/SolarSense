@@ -3,60 +3,24 @@ import { motion } from "framer-motion";
 import useIsMobile from "../../hooks/useIsMobile";
 import ChartRechartsArea from "../../components/ChartRechartsArea";
 
-
+// ---- تابع نرمال‌سازی داده‌ها ----
 function normalizeData(dataArray, lines) {
   const maxValues = {};
-
-  // مقدار ماکزیمم هر پارامتر رو پیدا کن
   lines.forEach((key) => {
-    maxValues[key] = Math.max(...dataArray.map(item => item[key] || 0));
+    maxValues[key] = Math.max(...dataArray.map((item) => item[key] || 0));
   });
-
-  // مقیاس‌گذاری مقادیر به صورت نسبی
-  return dataArray.map(item => {
+  return dataArray.map((item) => {
     const newItem = { ...item };
-    lines.forEach(key => {
+    lines.forEach((key) => {
       if (item[key] !== undefined && maxValues[key] > 0) {
         newItem[key] = item[key] / maxValues[key];
       } else {
-        newItem[key] = 0; // اگر مقدار صفر یا undefined بود
+        newItem[key] = 0;
       }
     });
     return newItem;
   });
 }
-
-function flattenData(dataArray) {
-  return dataArray.map(item => {
-    const flatItem = { timestamp: item.timestamp };
-    
-    // فیلدهای ولتاژ و جریان رو باز کن
-    ['voltage_inverter_output', 'voltage_load_input', 'voltage_line_in', 'voltage_line_out',
-     'current_inverter_output', 'current_load_input', 'current_line_in', 'current_line_out'].forEach(key => {
-      if (item[key]) {
-        flatItem[`${key}_a`] = item[key].a;
-        flatItem[`${key}_b`] = item[key].b;
-        flatItem[`${key}_c`] = item[key].c;
-      }
-    });
-
-    // فیلدهای فرکانس رو مستقیم کپی کن
-    ['frequency_main_bus', 'frequency_grid', 'frequency_line_in', 'frequency_line_out', 'fault_event'].forEach(key => {
-      if (item[key] !== undefined) {
-        flatItem[key] = item[key];
-      }
-    });
-
-    return flatItem;
-  });
-}
-
-
-const linesToShow = [
-  "voltage_inverter_output_a", "voltage_inverter_output_b", "voltage_inverter_output_c",
-  "current_inverter_output_a", "current_inverter_output_b", "current_inverter_output_c",
-  "frequency_main_bus"
-];
 
 function aggregateData(data, granularity, lines) {
   const grouped = {};
@@ -94,42 +58,50 @@ function aggregateData(data, granularity, lines) {
   });
 }
 
-
-
 function InteractiveCharts() {
   const isMobile = useIsMobile();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [granularity, setGranularity] = useState("minute"); // "minute", "hour", "day"
-
-  // تعیین خطوطی که می‌خوای رسم کنی
-  // مثلا ولتاژ فاز A و جریان فاز A
-  // اینها رو می‌تونی دستی تغییر بدی بر اساس داده‌هات
-  const linesToShow = isMobile
-    ? ["voltage_inverter_output_a"]   // روی موبایل فقط یه خط بکش
-    : [  "voltage_inverter_output_a", "voltage_inverter_output_b", "voltage_inverter_output_c",
-  "current_inverter_output_a", "current_inverter_output_b", "current_inverter_output_c",
-  "frequency_main_bus"]; // روی دسکتاپ چندتا پارامتر
+  const [granularity, setGranularity] = useState("minute");
+  const [availableLines, setAvailableLines] = useState([]); // ← همه‌ی پارامترهای موجود
+  const [selectedLines, setSelectedLines] = useState([]); // ← پارامترهایی که چک شدن
 
   useEffect(() => {
-    fetch("./microgrid_dummy_data.json")
+    fetch("http://localhost:8000/faults?limit=500")
       .then((res) => res.json())
       .then((jsonData) => {
-        const flattenedData = flattenData(jsonData);
-        const normalizedData = normalizeData(flattenedData, linesToShow);
-        setData(normalizedData);
+        if (!Array.isArray(jsonData)) jsonData = [jsonData]; // اگه بک فقط یه آبجکت برگردوند
+        setData(jsonData);
+
+        const keys = Object.keys(jsonData[0] || {}).filter(
+          (key) => typeof jsonData[0][key] === "number"
+        ); // فقط عددی‌ها
+        setAvailableLines(keys);
+
+        // انتخاب پیش‌فرض:
+        const defaultSelection = isMobile ? [keys[0]] : keys.slice(0, 4);
+        setSelectedLines(defaultSelection);
+
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Error loading data:", err);
+        console.error("Error fetching data:", err);
         setLoading(false);
       });
   }, []);
 
+  // پردازش داده برای چارت
   const processedData = useMemo(() => {
-  const normalized = normalizeData(flattenData(data), linesToShow);
-  return aggregateData(normalized, granularity, linesToShow);
-  }, [data, granularity]);
+    const normalized = normalizeData(data, selectedLines);
+    return aggregateData(normalized, granularity, selectedLines);
+  }, [data, selectedLines, granularity]);
+
+  // چک کردن یا برداشتن چک
+  const handleCheckboxChange = (line) => {
+    setSelectedLines((prev) =>
+      prev.includes(line) ? prev.filter((l) => l !== line) : [...prev, line]
+    );
+  };
 
   return (
     <motion.div
@@ -139,21 +111,40 @@ function InteractiveCharts() {
       exit={{ opacity: 0, scale: 0.8 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="w-full h-full bg-white p-4 rounded-lg shadow-md flex flex-wrap">
-          <h2 className="text-xs md:text-xl font-semibold mb-4">Interactive Charts Panel</h2>
+      <div className="w-full h-full bg-white p-4 rounded-lg shadow-md flex flex-col gap-4 overflow-auto">
+        <div className="flex flex-wrap items-center gap-4">
+          <h2 className="text-xs md:text-xl font-semibold">Interactive Charts Panel</h2>
           <select
             value={granularity}
             onChange={(e) => setGranularity(e.target.value)}
-            className="h-10 mx-5 rounded border"
+            className="h-10 rounded border px-2"
           >
             <option value="minute">دقیقه‌ای</option>
             <option value="hour">ساعتی</option>
             <option value="day">روزانه</option>
           </select>
+        </div>
+
+        {/* چک‌باکس‌ها */}
+        <div className="flex flex-wrap gap-3">
+          {availableLines.map((line) => (
+            <label key={line} className="flex items-center gap-1 text-sm">
+              <input
+                type="checkbox"
+                checked={selectedLines.includes(line)}
+                onChange={() => handleCheckboxChange(line)}
+                className="accent-blue-500"
+              />
+              {line}
+            </label>
+          ))}
+        </div>
+
+        {/* چارت */}
         {loading ? (
           <p>Loading data...</p>
         ) : (
-          <ChartRechartsArea data={processedData} lines={linesToShow} granularity={granularity} />
+          <ChartRechartsArea data={processedData} lines={selectedLines} granularity={granularity} />
         )}
       </div>
     </motion.div>
@@ -161,3 +152,5 @@ function InteractiveCharts() {
 }
 
 export default InteractiveCharts;
+
+// تابع aggregateData هم همونه که داشتی و لازم نیست عوض بشه
