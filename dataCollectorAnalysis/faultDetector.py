@@ -1,6 +1,7 @@
 # fault_detection.py
 
 from db import get_all_docs  # فرض می‌کنیم این تابع همه داکیومنت‌ها رو از دیتابیس برمی‌گردونه
+from severity import calculate_severity
 
 def detect_overvoltage_undervoltage(doc):
     for key in ['Va_rms', 'Vb_rms', 'Vc_rms']:
@@ -62,5 +63,6 @@ def process_all_documents(get_all_docs):
         )
         if fault:
             doc['fault_label'] = fault
+            doc['severity'] = calculate_severity(doc)
             results.append(doc)
     return results

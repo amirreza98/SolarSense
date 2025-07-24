@@ -111,7 +111,7 @@ function Alerts() {
                   {!isMobile && (
                     <>
                       <th className="border p-2 text-left">Severity</th>
-                      <th className="border p-2 text-left">Component</th>
+                      <th className="border p-2 text-left">Location</th>
                       <th className="border p-2 text-left">Status</th>
                       <th className="border p-2 text-left">Acknowledged By</th>
                     </>
@@ -134,9 +134,9 @@ function Alerts() {
                             color: severityColors[alert.severityLevel] || "gray",
                           }}
                         >
-                          {alert.severityLevel?.toUpperCase() || "N/A"}
+                          {alert.severity?.toUpperCase() || "N/A"}
                         </td>
-                        <td className="border p-2">{alert.componentAffected}</td>
+                        <td className="border p-2">{alert.location}</td>
                         <td className="border p-2">{alert.status}</td>
                         <td className="border p-2">
                           {alert.acknowledgedBy

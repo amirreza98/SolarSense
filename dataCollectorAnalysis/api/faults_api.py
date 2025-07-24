@@ -3,6 +3,7 @@ from typing import List
 from db import get_all_docs
 from faultDetector import process_all_documents
 from bson import ObjectId
+from system_summary import generate_system_summary
 
 router = APIRouter()
 
@@ -16,7 +17,10 @@ def get_faults(limit: int = Query(10, gt=0, le=1000)):
     data = process_all_documents(get_all_docs)[:limit]
     return data
 
-
+@router.get("/summary")
+def get_system_summary():
+    data = process_all_documents(get_all_docs)
+    return generate_system_summary(data)
 
 # # @router.get("/faults")
 # def get_all_faults():
